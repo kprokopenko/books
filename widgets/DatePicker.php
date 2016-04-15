@@ -11,6 +11,9 @@ class DatePicker extends \yii\jui\DatePicker
     public $language = 'ru';
 
     public $clientOptions = [
+        'yearRange' => '1147:c',
         'maxDate' => 0,
+        'changeMonth' => true,
+        'changeYear' => true,
     ];
 }
