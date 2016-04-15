@@ -19,7 +19,7 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'preview')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'date')->widget(DatePicker::className(), [
-        'dateFormat' => $model::DateFormat,
+        'dateFormat' => $model::JS_DATE_FORMAT,
     ]) ?>
 
     <?= $form->field($model, 'author_id')->dropDownList(Author::keyValueList(), ['prompt' => 'Выберите автора']) ?>
