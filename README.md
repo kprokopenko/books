@@ -40,6 +40,11 @@ composer --prefer-dist install
 ```
 docker-compose up -d 
 
+# подождать окончания инициализации композера. Логи можно посмотреть так:
+docker-compose logs composer
+
 docker-compose run app ./yii migrate
 docker-compose run app ./yii fixture/load "*"
 ```
+
+По адресу http://127.0.0.1/ будет доступен проект.
