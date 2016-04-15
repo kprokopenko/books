@@ -46,6 +46,11 @@ $config = [
                 '' => 'book',
             ],
         ],
+        'files' => [
+            'class' => 'app\components\Files',
+            'rootPath' => '@app/web/uploads',
+            'rootUrl' => '@web/uploads',
+        ]
     ],
     'params' => $params,
 ];
@@ -55,6 +60,7 @@ if (YII_ENV_DEV) {
     $config['bootstrap'][] = 'debug';
     $config['modules']['debug'] = [
         'class' => 'yii\debug\Module',
+        'allowedIPs' => ['*.*.*.*'],
     ];
 
     $config['bootstrap'][] = 'gii';

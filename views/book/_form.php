@@ -12,11 +12,15 @@ use yii\widgets\ActiveForm;
 
 <div class="book-form">
 
-    <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
 
     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'preview')->textInput(['maxlength' => true]) ?>
+    <?php if ($model->preview) {?>
+        <?= Html::img($model->getPreviewUrl()) ?>
+    <?php } ?>
+
+    <?= $form->field($model, 'previewFile')->fileInput() ?>
 
     <?= $form->field($model, 'date')->widget(DatePicker::className(), [
         'dateFormat' => $model::JS_DATE_FORMAT,
