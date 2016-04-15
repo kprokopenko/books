@@ -6,4 +6,5 @@ return [
     'username' => 'books',
     'password' => 'secret',
     'charset' => 'utf8',
+    'enableSchemaCache' => true,
 ];

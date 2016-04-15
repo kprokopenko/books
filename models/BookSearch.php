@@ -52,12 +52,25 @@ class BookSearch extends Book
      */
     public function search($params)
     {
-        $query = Book::find();
+        $query = Book::find()
+            ->joinWith('author');
 
         // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'sort' => [
+                'attributes' => [
+                    'id',
+                    'name',
+                    'date',
+                    'date_create',
+                    'author' => [
+                        'asc' => ['authors.first_name' => SORT_ASC, 'authors.last_name' => SORT_ASC],
+                        'desc' => ['authors.first_name' => SORT_DESC, 'authors.last_name' => SORT_DESC],
+                    ],
+                ],
+            ],
         ]);
 
         $this->load($params);
