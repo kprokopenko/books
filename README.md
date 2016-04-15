@@ -38,7 +38,7 @@ composer --prefer-dist install
 ### Docker ###
 Из консоли проекта выполнить:
 ```
-docker-compose -d up
+docker-compose up -d 
 
 docker-compose run app ./yii migrate
 docker-compose run app ./yii fixture/load "*"
