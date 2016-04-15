@@ -31,12 +31,15 @@ class Author extends \yii\db\ActiveRecord
      */
     public static function keyValueList($limit = 15, $offset = 0)
     {
-        return self::find()
-            ->select(['value' => "CONCAT_WS(' ', first_name, last_name)", 'id'])
-            ->offset($offset)
-            ->limit($limit)
-            ->indexBy('id')
-            ->column();
+        // Поскольку по условию задачи, список авторов неизменен, то CacheDependency не определен
+        return self::getDb()->cache(function () use ($limit, $offset) {
+            return self::find()
+                ->select(['value' => "CONCAT_WS(' ', first_name, last_name)", 'id'])
+                ->offset($offset)
+                ->limit($limit)
+                ->indexBy('id')
+                ->column();
+        });
     }
 
     /**
