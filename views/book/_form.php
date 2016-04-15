@@ -1,8 +1,8 @@
 <?php
 
 use app\models\Author;
+use app\widgets\DatePicker;
 use yii\helpers\Html;
-use yii\jui\DatePicker;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
@@ -22,13 +22,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'previewFile')->fileInput() ?>
 
-    <?= $form->field($model, 'date')->widget(DatePicker::className(), [
-        'dateFormat' => $model::JS_DATE_FORMAT,
-        'language' => 'ru',
-        'clientOptions' => [
-            'maxDate' => 0,
-        ],
-    ]) ?>
+    <?= $form->field($model, 'date')->widget(DatePicker::className()) ?>
 
     <?= $form->field($model, 'author_id')->dropDownList(Author::keyValueList(), ['prompt' => 'Выберите автора']) ?>
     

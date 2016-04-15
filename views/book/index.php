@@ -2,9 +2,9 @@
 
 use app\assets\BookIndexAsset;
 use app\models\Book;
-use yii\bootstrap\Modal;
 use yii\helpers\Html;
 use yii\grid\GridView;
+use yii\jui\Dialog;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\BookSearch */
@@ -16,31 +16,28 @@ $this->params['breadcrumbs'][] = $this->title;
 BookIndexAsset::register($this);
 ?>
 
-<?php Modal::begin([
+<?php Dialog::begin([
     'id' => 'preview-modal',
-    'header' => '<h2>Превью</h2>',
-    'clientEvents' => [
-        'shown' => 'previewShowEvent',
+    'clientOptions' => [
+        'modal' => true,
+        'autoOpen' => false,
+        'width' => 600,
+        'height' => 600,
     ],
 ]);
 
 echo Html::img('');
 
-
-Modal::end();
+Dialog::end();
 ?>
 
 <div class="book-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+    <?= $this->render('_search', ['model' => $searchModel]); ?>
 
-    <p>
-        <?= Html::a('Create Book', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
         'columns' => [
             'id',
             'name',
@@ -66,4 +63,8 @@ Modal::end();
             ],
         ],
     ]); ?>
+
+    <p>
+        <?= Html::a('Добавить книгу', ['create'], ['class' => 'btn btn-success']) ?>
+    </p>
 </div>

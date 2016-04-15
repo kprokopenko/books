@@ -13,13 +13,24 @@ use app\models\Book;
 class BookSearch extends Book
 {
     /**
+     * @var string Дата публикации. От.
+     */
+    public $date_from;
+    /**
+     * @var string Дата публикации. До.
+     */
+    public $date_to;
+
+    /**
      * @inheritdoc
      */
     public function rules()
     {
         return [
-            [['id', 'date_create', 'date_update', 'author_id'], 'integer'],
-            [['name', 'preview', 'date'], 'safe'],
+            [['date_from', 'date_to'], 'default', 'value' => null],
+            [['author_id'], 'integer'],
+            [['name'], 'string'],
+            [['date_from', 'date_to'], 'date', 'format' => 'php:' . self::PHP_DATE_FORMAT]
         ];
     }
 
@@ -58,17 +69,21 @@ class BookSearch extends Book
         }
 
         // grid filtering conditions
-        $query->andFilterWhere([
-            'id' => $this->id,
-            'date_create' => $this->date_create,
-            'date_update' => $this->date_update,
-            'date' => $this->date,
-            'author_id' => $this->author_id,
-        ]);
+        $query->andFilterWhere(['author_id' => $this->author_id]);
 
-        $query->andFilterWhere(['like', 'name', $this->name])
-            ->andFilterWhere(['like', 'preview', $this->preview]);
+        $query->andFilterWhere(['>', 'date', $this->date_from]);
+        $query->andFilterWhere(['<', 'date', $this->date_to]);
+
+        $query->andFilterWhere(['like', 'name', $this->name]);
 
         return $dataProvider;
+    }
+
+    public function attributeLabels()
+    {
+        return array_merge(parent::attributeLabels(), [
+            'date_from' => 'Дата выхода книги. От',
+            'date_to' => 'Дата выхода книги. До',
+        ]);
     }
 }

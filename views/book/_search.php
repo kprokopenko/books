@@ -1,5 +1,7 @@
 <?php
 
+use app\models\Author;
+use app\widgets\DatePicker;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
@@ -15,23 +17,16 @@ use yii\widgets\ActiveForm;
         'method' => 'get',
     ]); ?>
 
-    <?= $form->field($model, 'id') ?>
+    <?= $form->field($model, 'author_id')->dropDownList(Author::keyValueList(), ['prompt' => 'автор']) ?>
 
     <?= $form->field($model, 'name') ?>
 
-    <?= $form->field($model, 'date_create') ?>
+    <?= $form->field($model, 'date_from')->widget(DatePicker::className()) ?>
 
-    <?= $form->field($model, 'date_update') ?>
-
-    <?= $form->field($model, 'preview') ?>
-
-    <?php // echo $form->field($model, 'date') ?>
-
-    <?php // echo $form->field($model, 'author_id') ?>
+    <?= $form->field($model, 'date_to')->widget(DatePicker::className()) ?>
 
     <div class="form-group">
-        <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>
-        <?= Html::resetButton('Reset', ['class' => 'btn btn-default']) ?>
+        <?= Html::submitButton('Искать', ['class' => 'btn btn-primary']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>
