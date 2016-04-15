@@ -12,7 +12,7 @@ class m160415_073627_create_books extends Migration
             'date_create' => $this->integer()->notNull(),
             'date_update' => $this->integer()->notNull(),
             'preview' => $this->string(),
-            'date' => $this->dateTime()->notNull(),
+            'date' => $this->date()->notNull(),
             'author_id' => $this->integer()->notNull(),
         ]);
         

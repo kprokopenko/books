@@ -20,6 +20,8 @@ use yii\behaviors\TimestampBehavior;
  */
 class Book extends \yii\db\ActiveRecord
 {
+    const DateFormat = 'yyyy-MM-dd';
+    
     /**
      * @inheritdoc
      */
@@ -47,7 +49,7 @@ class Book extends \yii\db\ActiveRecord
         return [
             [['name', 'date', 'author_id'], 'required'],
             [['author_id'], 'integer'],
-            [['date'], 'safe'],
+            [['date'], 'date', 'format' => self::DateFormat],
             [['name', 'preview'], 'string', 'max' => 255],
             [['author_id'], 'exist', 'skipOnError' => true, 'targetClass' => Author::className(), 'targetAttribute' => ['author_id' => 'id']],
         ];
@@ -65,7 +67,7 @@ class Book extends \yii\db\ActiveRecord
             'date_update' => 'Date Update',
             'preview' => 'Превью книги',
             'date' => 'Дата выхода книги',
-            'author_id' => 'Author ID',
+            'author_id' => 'Автор',
         ];
     }
 

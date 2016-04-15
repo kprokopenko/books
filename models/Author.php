@@ -24,6 +24,22 @@ class Author extends \yii\db\ActiveRecord
     }
 
     /**
+     * Список авторов в виде массива ['author_id' => 'фио']
+     * @param int $limit маскимальное количество
+     * @param int $offset начальная позиция
+     * @return array
+     */
+    public static function keyValueList($limit = 15, $offset = 0)
+    {
+        return self::find()
+            ->select(['value' => "CONCAT_WS(' ', first_name, last_name)", 'id'])
+            ->offset($offset)
+            ->limit($limit)
+            ->indexBy('id')
+            ->column();
+    }
+
+    /**
      * @inheritdoc
      */
     public function rules()

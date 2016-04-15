@@ -1,6 +1,8 @@
 <?php
 
+use app\models\Author;
 use yii\helpers\Html;
+use yii\jui\DatePicker;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
@@ -16,10 +18,12 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'preview')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'date')->textInput() ?>
+    <?= $form->field($model, 'date')->widget(DatePicker::className(), [
+        'dateFormat' => $model::DateFormat,
+    ]) ?>
 
-    <?= $form->field($model, 'author_id')->textInput() ?>
-
+    <?= $form->field($model, 'author_id')->dropDownList(Author::keyValueList(), ['prompt' => 'Выберите автора']) ?>
+    
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>
