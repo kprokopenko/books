@@ -10,7 +10,7 @@ use yii\jui\Dialog;
 /* @var $searchModel app\models\BookSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Books';
+$this->title = 'Книги';
 $this->params['breadcrumbs'][] = $this->title;
 
 BookIndexAsset::register($this);
