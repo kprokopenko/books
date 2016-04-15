@@ -60,11 +60,11 @@ class Book extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'name' => 'Name',
+            'name' => 'Название',
             'date_create' => 'Date Create',
             'date_update' => 'Date Update',
-            'preview' => 'Preview',
-            'date' => 'Date',
+            'preview' => 'Превью книги',
+            'date' => 'Дата выхода книги',
             'author_id' => 'Author ID',
         ];
     }
