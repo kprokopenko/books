@@ -16,7 +16,7 @@ use yii\behaviors\TimestampBehavior;
  * @property string $date
  * @property integer $author_id
  *
- * @property Authors $author
+ * @property Author $author
  */
 class Book extends \yii\db\ActiveRecord
 {
