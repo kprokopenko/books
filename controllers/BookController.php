@@ -6,6 +6,7 @@ use Yii;
 use app\models\Book;
 use app\models\BookSearch;
 use yii\filters\AccessControl;
+use yii\helpers\Url;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -45,6 +46,8 @@ class BookController extends Controller
      */
     public function actionIndex()
     {
+        Url::remember();
+
         $searchModel = new BookSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
@@ -61,6 +64,8 @@ class BookController extends Controller
      */
     public function actionView($id)
     {
+        Url::remember();
+        
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
@@ -95,7 +100,7 @@ class BookController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->goBack();
         } else {
             return $this->render('update', [
                 'model' => $model,
