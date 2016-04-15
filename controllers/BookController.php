@@ -8,6 +8,7 @@ use app\models\BookSearch;
 use yii\filters\AccessControl;
 use yii\helpers\Url;
 use yii\web\Controller;
+use yii\web\MethodNotAllowedHttpException;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
@@ -61,12 +62,15 @@ class BookController extends Controller
      * Displays a single Book model.
      * @param integer $id
      * @return mixed
+     * @throws MethodNotAllowedHttpException
      */
     public function actionView($id)
     {
-        Url::remember();
-        
-        return $this->render('view', [
+        if (!\Yii::$app->request->isAjax) {
+            throw new MethodNotAllowedHttpException('Method Not Allowed. This url can only handle by AJAX');
+        }
+
+        return $this->renderAjax('view', [
             'model' => $this->findModel($id),
         ]);
     }
@@ -81,7 +85,7 @@ class BookController extends Controller
         $model = new Book();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->goBack();
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -118,7 +122,7 @@ class BookController extends Controller
     {
         $this->findModel($id)->delete();
 
-        return $this->redirect(['index']);
+        return $this->goBack();
     }
 
     /**

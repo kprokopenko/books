@@ -31,6 +31,21 @@ echo Html::img('');
 Dialog::end();
 ?>
 
+<?php Dialog::begin([
+    'id' => 'view-ajax-modal',
+    'clientOptions' => [
+        'modal' => true,
+        'autoOpen' => false,
+        'width' => 600,
+        'height' => 600,
+    ],
+]);
+
+echo Html::img('');
+
+Dialog::end();
+?>
+
 <div class="book-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
@@ -46,7 +61,6 @@ Dialog::end();
                 'content' => function (Book $model) {
                     return Html::img($model->getPreviewUrl(), [
                         'class' => 'preview-button',
-
                     ]);
                 },
             ],
@@ -63,12 +77,17 @@ Dialog::end();
                 'buttons' => [
                     'update' => function ($url, $model, $key) {
                         $options = [
-                            'title' => Yii::t('yii', 'Update'),
-                            'aria-label' => Yii::t('yii', 'Update'),
-                            'data-pjax' => '0',
+                            'title' => 'Редактировать',
                             'target' => '_blank'
                         ];
                         return Html::a('<span class="glyphicon glyphicon-pencil"></span>', $url, $options);
+                    },
+                    'view' => function ($url, $model, $key) {
+                        $options = [
+                            'title' => 'Просмотр',
+                            'class' => 'ajax-view',
+                        ];
+                        return Html::a('<span class="glyphicon glyphicon-eye-open"></span>', $url, $options);
                     }
                 ],
             ],
