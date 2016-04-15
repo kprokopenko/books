@@ -1,0 +1,9 @@
+.preview-button {
+    width: 100px;
+    height: 100px;
+}
+
+#preview-modal img {
+    max-width: 550px;
+    max-height: 500px;
+}
