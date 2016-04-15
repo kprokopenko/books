@@ -20,6 +20,10 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'date')->widget(DatePicker::className(), [
         'dateFormat' => $model::JS_DATE_FORMAT,
+        'language' => 'ru',
+        'clientOptions' => [
+            'maxDate' => 0,
+        ],
     ]) ?>
 
     <?= $form->field($model, 'author_id')->dropDownList(Author::keyValueList(), ['prompt' => 'Выберите автора']) ?>
