@@ -8,8 +8,8 @@ class m160415_073626_create_authors extends Migration
     {
         $this->createTable('authors', [
             'id' => $this->primaryKey(),
-            'first_name' => $this->string(),
-            'last_name' => $this->string(),
+            'first_name' => $this->string()->notNull(),
+            'last_name' => $this->string()->notNull(),
         ]);
     }
 

@@ -8,12 +8,12 @@ class m160415_073627_create_books extends Migration
     {
         $this->createTable('books', [
             'id' => $this->primaryKey(),
-            'name' => $this->string(),
-            'date_create' => $this->integer(),
-            'date_update' => $this->integer(),
+            'name' => $this->string()->notNull(),
+            'date_create' => $this->integer()->notNull(),
+            'date_update' => $this->integer()->notNull(),
             'preview' => $this->string(),
-            'date' => $this->dateTime(),
-            'author_id' => $this->integer(),
+            'date' => $this->dateTime()->notNull(),
+            'author_id' => $this->integer()->notNull(),
         ]);
         
         $this->addForeignKey(
