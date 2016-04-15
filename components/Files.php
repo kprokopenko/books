@@ -82,6 +82,13 @@ class Files extends Component
      */
     public function delete($id)
     {
-        unlink($this->path($id));
+        if (!$id) {
+            return ;
+        }
+
+        $path = $this->path($id);
+        if (is_writable($path)) {
+            unlink($path);
+        }
     }
 }
